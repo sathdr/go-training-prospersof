@@ -3,23 +3,30 @@ package main
 import (
 	"encoding/csv"
 	"fmt"
+	"io"
 	"log"
 	"os"
 )
 
 func main() {
 	csvFile, err := os.Open("oscar_age_male.csv")
-	csvReader := csv.NewReader(csvFile)
-
-	records, err := csvReader.ReadAll()
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	csvReader := csv.NewReader(csvFile)
+
+	const nameColumn = 3
 	actorMap := make(map[string]int)
-	for i := 0; i < len(records); i++ {
-		row := records[i]
-		actorName := row[3]
+	for {
+		record, err := csvReader.Read()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			log.Fatal(err)
+		}
+		actorName := record[nameColumn]
 		actorMap[actorName]++
 	}
 
