@@ -1,0 +1,5 @@
+GET http://localhost:8888/fizzbuzz/12
+
+###
+
+GET http://localhost:8888/fizzbuzz/18
