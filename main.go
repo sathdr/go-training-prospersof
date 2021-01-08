@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"prospersof/auth"
 	"prospersof/fizzbuzz"
 	"strconv"
 	"time"
@@ -16,6 +17,7 @@ func main() {
 	r := mux.NewRouter()
 
 	r.HandleFunc("/fizzbuzz/{number}", fizzBuzzHandler)
+	r.HandleFunc("/token", auth.TokenHandler)
 
 	srv := &http.Server{
 		Handler:      r,
