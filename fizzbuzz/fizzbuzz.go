@@ -1,6 +1,9 @@
 package fizzbuzz
 
-import "strconv"
+import (
+	"fmt"
+	"strconv"
+)
 
 // Say return a number
 func Say(n int) string {
@@ -14,4 +17,16 @@ func Say(n int) string {
 		return "Buzz"
 	}
 	return strconv.Itoa(n)
+}
+
+// RandFunc is a function
+type RandFunc func(int) int
+
+// Format format random 4 number fizzbuzz
+func Format(randFunction func() int) string {
+	return fmt.Sprintf("%s-%s-%s-%s", Say(randFunction()), Say(randFunction()), Say(randFunction()), Say(randFunction()))
+}
+
+func FormatGetInterface(random interface{ Intn(n int) int }) string {
+	return fmt.Sprintf("%s-%s-%s-%s", Say(random.Intn(100)+1), Say(random.Intn(100)+1), Say(random.Intn(100)+1), Say(random.Intn(100)+1))
 }
